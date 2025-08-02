@@ -32,11 +32,14 @@ export default function MemberDashboard() {
   const fetchMeetings = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch("http://localhost:5000/api/meetings", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      const response = await fetch(
+        "https://meetings-scheduler.onrender.com/api/meetings",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json()
@@ -50,11 +53,14 @@ export default function MemberDashboard() {
   const fetchUpcomingMeetings = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch("http://localhost:5000/api/meetings/upcoming", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      const response = await fetch(
+        "https://meetings-scheduler.onrender.com/api/meetings/upcoming",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json()
@@ -70,17 +76,20 @@ export default function MemberDashboard() {
   const handleComment = async (meetingId, content) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch("http://localhost:5000/api/comments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          meetingId,
-          content,
-        }),
-      })
+      const response = await fetch(
+        "https://meetings-scheduler.onrender.com/api/comments",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            meetingId,
+            content,
+          }),
+        }
+      );
 
       if (response.ok) {
         // Optionally refresh meetings or show success message

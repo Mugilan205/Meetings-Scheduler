@@ -33,11 +33,14 @@ export default function AdminDashboard() {
   const fetchMeetings = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch("http://localhost:5000/api/meetings", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      const response = await fetch(
+        "https://meetings-scheduler.onrender.com/api/meetings",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json()
@@ -53,14 +56,17 @@ export default function AdminDashboard() {
   const handleCreateMeeting = async (meetingData) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch("http://localhost:5000/api/admin/meetings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(meetingData),
-      })
+      const response = await fetch(
+        "https://meetings-scheduler.onrender.com/api/admin/meetings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(meetingData),
+        }
+      );
 
       if (response.ok) {
         setShowForm(false)
@@ -74,14 +80,17 @@ export default function AdminDashboard() {
   const handleUpdateMeeting = async (meetingData) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:5000/api/admin/meetings/${editingMeeting._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(meetingData),
-      })
+      const response = await fetch(
+        `https://meetings-scheduler.onrender.com/api/admin/meetings/${editingMeeting._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(meetingData),
+        }
+      );
 
       if (response.ok) {
         setEditingMeeting(null)
@@ -99,12 +108,15 @@ export default function AdminDashboard() {
 
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:5000/api/admin/meetings/${meetingId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      const response = await fetch(
+        `https://meetings-scheduler.onrender.com/admin/meetings/${meetingId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         fetchMeetings()

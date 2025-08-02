@@ -28,13 +28,16 @@ export default function LoginForm({ userType = "member" }) {
     setError("")
 
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/${userType}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+      const response = await fetch(
+        `https://meetings-scheduler.onrender.com/api/auth/${userType}/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json()
 

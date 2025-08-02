@@ -36,17 +36,20 @@ export default function RegisterForm({ userType = "member" }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/${userType}/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
-      })
+      const response = await fetch(
+        `https://meetings-scheduler.onrender.com/api/auth/${userType}/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
 
       const data = await response.json()
 
